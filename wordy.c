@@ -1,26 +1,43 @@
 #include <stdio.h>
+#define M printf
+#define F(n)for(n=1;n<33;n++)
 typedef unsigned int U;
-#define cf(a,x) (((a<<1)&x)!=0)+((a&x)!=0)+(((a>>1)&x)!=0)
-#define count(a,b,c,x) cf(a,x)+cf(b,x)+cf(c,x)
-main() {
-	U cellsA[22],cellsB[22];
-	U *cells,*cells2,i,x,y;
-	cells=&cellsA;cells2=&cellsB;
-	cells[0]=cells2[0]=cells[21]=cells2[21]=0;
-	for(i=1;i<21;i++)cells[i]=(rand()+(rand()<<16));
-    while(1) {
-        for(y=1;y<21;y++) {
-            cells2[y]=0;
-            for(x=1<<31;x>0;x>>=1){
-                U live = cells[y] & x;
-                U sum = count(cells[y-1],cells[y],cells[y+1],x);
-                if(sum==3||(live)&&(sum==4)){
-                    cells2[y] |= x;
-                    printf("<>");
-                } else {
-                    printf("  "); } }
-            printf("\n"); }
-        printf("------------------------------------------------------------------------\n");
-        fflush(stdout);
-        U *a = cells; cells = cells2; cells2 = a; system("sleep 0.1"); } }
+main(){
 
+    U Q[34],W[34];
+    U*E=&Q,*R=&W,i,x,y;
+    *E=*R=E[33]=R[33]=0;
+
+    for(i=1;i<33;i++)
+        E[i]=(rand()+(rand()<<16));
+
+    B:
+    F(y)
+    {
+        R[y]=0;
+
+        F(i)
+        {
+            U x=1<<(i-1);
+            U S=E[y]&x;
+
+            #define l(a) !!(a<<1&x)+!!(a&x)+!!(a>>1&x)
+            U A=l(E[y-1])+l(E[y])+l(E[y+1]);
+
+            if(A==3||S&&A==4){
+                R[y]|=x;M("()");
+            }else{
+                M("  ");
+            }
+        }
+        M("\n");
+    }
+
+    F(y)M("--");M("\n");
+
+    fflush(stdout);
+    U*a=E;E=R;R=a;
+    system("sleep 0.1");
+
+    goto B;
+}
