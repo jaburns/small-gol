@@ -1,6 +1,6 @@
 ### small-gol
 
-Game of life in 315 bytes of C.
+Game of life in 311 bytes of C.
 
 [Online demo (a little flickery)](http://showterm.io/8caef2a82b46a1429150b#fast)
 
