@@ -1,6 +1,6 @@
 ### small-gol
 
-Game of life in 333 bytes of C.
+Game of life in 338 bytes of C.
 
 ``` shell
 git clone https://github.com/jeremyaburns/small-gol.git
